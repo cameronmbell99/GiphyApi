@@ -3,6 +3,7 @@ $(document).ready(function() {
     var list = ["Neil Patrick Harris", "Samuel L. Jackson", "Sylvester Stalone", "Michael B. Jordan", "Brad Pitt", "Scarlett Johansan", "Emily Blunt", "Anne Hathaway", "Natalie Portman", "Keira Knightley", "Jennifer Lawrence", "Bruce Willis"];
 
     function makeButtons(list) {
+        console.log(list);
         $("#buttons").empty();
         for (var i = 0; i < list.length; i++) {
             var button = $("<button>");
@@ -10,34 +11,37 @@ $(document).ready(function() {
             button.attr("list-member", list[i]);
             button.text(list[i]);
             $("#buttons").append(button);
+            console.log(i);
+            // 
         }
     }
 
-    //Makes all the buttons
+    //Make all the buttons
     makeButtons(list);
 
     var submitbutton = $("<button>");
+    submitbutton.attr("id", "submitButton");
     submitbutton.text("Submit");
     $("#submit").append(submitbutton);
 
-    //adds what you submitted to the array
-    $("#submit").click(function() {
+    //add what you submitted to the array
+    $(document).on("click", "#submitButton", function() {
+        console.log("getting here");
         var text = $("#textBox").val().trim();
         if (text !== "") {
 
             list.push(text);
-
+            console.log(text);
             makeButtons(list);
         }
         $("#textBox").val('');
     });
 
-    //displays what button is being pressed
+    //calls 10 images from Giphy api, and displays them and their "rating"
     $(".list-button").on("click", function() {
         $("#gifs").empty();
         var person = $(this).attr("list-member");
         console.log(person);
-        //https://api.giphy.com/v1/gifs/search?api_key=iG6Vfxa9G7IT19VXGWv4IsdmFBpkKZAw&q=&limit=10&offset=0&rating=G&lang=en
         var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=iG6Vfxa9G7IT19VXGWv4IsdmFBpkKZAw&q=" + person + "&limit=10&lang=en";
         console.log(queryURL);
         $.ajax({
