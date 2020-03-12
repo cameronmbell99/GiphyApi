@@ -12,7 +12,6 @@ $(document).ready(function() {
             button.text(list[i]);
             $("#buttons").append(button);
             console.log(i);
-            // 
         }
     }
 
@@ -37,6 +36,13 @@ $(document).ready(function() {
         $("#textBox").val('');
     });
 
+    $(document).on("click", "img", function() {
+        var still = $(this).id;
+        console.log(still);
+        if ($(this).attr("src") === stills[1])
+            $(this).attr("src, ")
+    });
+
     //calls 10 images from Giphy api, and displays them and their "rating"
     $(document).on("click", ".list-button", function() {
         $("#gifs").empty();
@@ -51,14 +57,17 @@ $(document).ready(function() {
             .then(function(response) {
                 var results = response.data;
                 console.log(results);
+                //console.log(response.attr("data-gif"))
                 for (var i = 0; i < results.length; i++) {
+
                     var gifDiv = $("<div>");
 
                     var rating = results[i].rating;
 
                     var p = $("<p>").text("Rating: " + rating);
 
-                    var personImage = $("<img>");
+                    var personImage = $("<img id = " + i + ">");
+
                     personImage.attr("src", results[i].images.fixed_height.url);
 
                     gifDiv.prepend(p);
@@ -67,6 +76,8 @@ $(document).ready(function() {
                     $("#gifs").prepend(gifDiv);
                     console.log(i);
                 }
+                console.log(stills);
+                console.log(animations);
             });
     });
 

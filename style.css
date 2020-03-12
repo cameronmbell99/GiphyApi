@@ -1,0 +1,45 @@
+.list {
+    width: auto;
+    height: auto;
+    border: 1px solid darkcyan;
+    border-radius: 8px;
+    padding: 2px;
+    float: left;
+    margin: 2px;
+}
+
+.list-button-color {
+    color: darkcyan;
+}
+
+#buttons {
+    padding: 10px;
+}
+
+#submit {
+    padding: 20px;
+    float: right;
+}
+
+#submitButton {
+    color: darkcyan;
+    border: 1px solid darkcyan;
+    border-radius: 5px;
+}
+
+#textBox {
+    margin-top: 20px;
+    float: right;
+}
+
+body {
+    background: darkslategray;
+}
+
+p {
+    color: white;
+}
+
+img {
+    border-color: darkcyan;
+}
