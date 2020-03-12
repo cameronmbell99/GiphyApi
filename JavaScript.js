@@ -20,20 +20,33 @@ $(document).ready(function() {
     submitbutton.text("Submit");
     $("#submit").append(submitbutton);
 
+    //adds what you submitted to the array
+    $("#submit").click(function() {
+        var text = $("#textBox").val().trim();
+        if (text !== "") {
+
+            list.push(text);
+
+            makeButtons(list);
+        }
+        $("#textBox").val('');
+    });
+
     //displays what button is being pressed
     $(".list-button").on("click", function() {
-        console.log($(this).attr("list-member"));
+        $("#gifs").empty();
         var person = $(this).attr("list-member");
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            person + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
-
+        console.log(person);
+        //https://api.giphy.com/v1/gifs/search?api_key=iG6Vfxa9G7IT19VXGWv4IsdmFBpkKZAw&q=&limit=10&offset=0&rating=G&lang=en
+        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=iG6Vfxa9G7IT19VXGWv4IsdmFBpkKZAw&q=" + person + "&limit=10&lang=en";
+        console.log(queryURL);
         $.ajax({
                 url: queryURL,
                 method: "GET"
             })
             .then(function(response) {
                 var results = response.data;
-
+                console.log(results);
                 for (var i = 0; i < results.length; i++) {
                     var gifDiv = $("<div>");
 
@@ -48,19 +61,10 @@ $(document).ready(function() {
                     gifDiv.prepend(personImage);
 
                     $("#gifs").prepend(gifDiv);
+                    console.log(i);
                 }
             });
     });
 
-    //adds what you submitted to the array
-    $("#submit").click(function() {
-        var text = $("#textBox").val().trim();
-        if (text !== "") {
 
-            list.push(text);
-
-            makeButtons(list);
-        }
-        $("#textBox").val('');
-    });
 });
