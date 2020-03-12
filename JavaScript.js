@@ -38,7 +38,7 @@ $(document).ready(function() {
     });
 
     //calls 10 images from Giphy api, and displays them and their "rating"
-    $(".list-button").on("click", function() {
+    $(document).on("click", ".list-button", function() {
         $("#gifs").empty();
         var person = $(this).attr("list-member");
         console.log(person);
